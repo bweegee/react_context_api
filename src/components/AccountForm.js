@@ -4,11 +4,11 @@ import { AccountConsumer, } from '../providers/AccountProvider';
 
 class AccountForm extends React.Component {
   state = {
-    username: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-    avatar: '',
+    username: this.props.username,
+    email: this.props.email,
+    firstName:this.props.firstName,
+    lastName:this.props.lastName,
+    avatar:this.props.avatar,
   };
 
   handleChange = e => {
@@ -18,16 +18,18 @@ class AccountForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const acct = {...this.state }
+    this.props.updateAccount(acct);
   };
 
   render() {
     const {username, email, firstName, lastName, avatar} = this.state;
     return (
       <Box direction="column" padding="small" align="center">
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <FormField
             name="username"
-            label="Username"
+            label="username"
             value={username}
             onChange={this.handleChange}
           />
@@ -59,7 +61,6 @@ class AccountForm extends React.Component {
             type="submit"
             primary
             label="Submit"
-            onSubmit={this.handleSubmit}
           />
         </Form>
       </Box>
@@ -67,21 +68,19 @@ class AccountForm extends React.Component {
   }
 }
 
-const ConnectedAccountForm = (props) => {
-  return (
-    <AccountConsumer>
-      { value => (
-        <AccountForm
-          {...props}
-          username={value.username}
-          firstName={value.firstName}
-          lastName={value.lastName}
-          avatar={value.avatar}
-          updateAccount={value.updateAccount}
-        />
-      )}
-    </AccountConsumer>
-  )
-}
+const ConnectedAccountForm = (props) => (
+  <AccountConsumer>
+    { value => (
+      <AccountForm
+        { ...props }
+        username={value.username}
+        email={value.email}
+        firstName={value.firstName}
+        lastName={value.lastName}
+        avatar={value.avatar}
+      />
+    )}
+  </AccountConsumer>
+)
 
 export default ConnectedAccountForm;

@@ -2,17 +2,16 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import AccountProfile from './components/AccountProfile';
 import { Switch, Route } from 'react-router-dom';
-import { Grommet, Box, } from 'grommet';
+import { Grommet, } from 'grommet';
 
 const App = () => (
   <Grommet>
     <Navbar />
-    <Box>
       <Switch>
         <Route
           exact
           path='/'
-          render={ () => <div>Home</div> }
+          render={ () => <div></div> }
         />
         <Route
           exact
@@ -20,7 +19,6 @@ const App = () => (
           render={ () => <AccountProfile /> }
         />
       </Switch>
-    </Box>
   </Grommet>
 )
 
