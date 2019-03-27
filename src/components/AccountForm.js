@@ -25,7 +25,6 @@ class AccountForm extends React.Component {
   render() {
     const {username, email, firstName, lastName, avatar} = this.state;
     return (
-      <Box direction="column" padding="small" align="center">
         <Form onSubmit={this.handleSubmit}>
           <FormField
             name="username"
@@ -63,7 +62,6 @@ class AccountForm extends React.Component {
             label="Submit"
           />
         </Form>
-      </Box>
     );
   }
 }
@@ -78,6 +76,7 @@ const ConnectedAccountForm = (props) => (
         firstName={value.firstName}
         lastName={value.lastName}
         avatar={value.avatar}
+        updateAccount={value.updateAccount}
       />
     )}
   </AccountConsumer>
